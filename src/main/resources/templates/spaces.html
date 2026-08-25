@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Spaces</title>
+</head>
+<body>
+<h1>Here are all available spaces:</h1>
+
+<h2>Spaces</h2>
+<ul>
+  <li th:each="space : ${spaces}">
+        <h2 th:text="${space.name}"></h2>
+        <p th:text="${space.description}"></p>
+        <p th:text="'£' + ${space.price}"></p>
+      <p th:if="${space.rules != null}" th:text="'Rules: ' + ${space.rules}"></p>
+  </li>
+
+</ul>
+
+
+
+</body>
+</html>

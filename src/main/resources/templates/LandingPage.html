@@ -1,13 +1,22 @@
 <!DOCTYPE html>
 
-<html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"  lang="">
 
 <head>
     <title>MakersBnB</title>
 </head>
 
 <body>
+<div sec:authorize="isAuthenticated()">
+    Hello, you are logged in as <span sec:authentication="principal.attributes['email']"></span>
+</div>
 
+<div sec:authorize="isAuthenticated()">
+    <form th:action="@{/logout}" method="post">
+        <button type="submit">Logout</button>
+    </form>
+</div>
 <h1>Welcome to MakersBnB</h1>
 
 <!-- th:text is a Thymeleaf atttribute used to generate the actual `h3` text -->

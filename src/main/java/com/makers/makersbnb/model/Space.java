@@ -34,6 +34,7 @@ public class Space {
 
     private String rules;
 
+}
 
 //    // a one-argument constructor
 //    public Space(String name, String description, Integer price) {
@@ -64,5 +65,5 @@ public class Space {
 //        this.price = price;
 //    }
 
-}
+
 

@@ -1,20 +1,18 @@
 package com.makers.makersbnb.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
 
 // @Entity - instances of this class map to database records
 @Entity
 
 // @Table - those records can be found in the spaces table
 @Table(name = "SPACES")
+//@SecondaryTable(name = "available_dates", pkJoinColumns = @PrimaryKeyJoinColumn(name = "space_id"))
 @Getter @Setter @NoArgsConstructor
 
 public class Space {
@@ -33,6 +31,13 @@ public class Space {
     private Integer price;
 
     private String rules;
+
+    @OneToMany(mappedBy = "space")
+
+    private List<AvailableDate> dates;
+
+
+
 
 }
 

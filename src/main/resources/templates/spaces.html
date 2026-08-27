@@ -14,6 +14,15 @@
         <p th:text="${space.description}"></p>
         <p th:text="'£' + ${space.price}"></p>
       <p th:if="${space.rules != null}" th:text="'Rules: ' + ${space.rules}"></p>
+
+      <p>Available Dates:</p>
+
+      <ul>
+          <li th:each="availableDate : ${space.dates}"
+              th:text="${#dates.format(availableDate.date, 'dd-MM-yyyy')}">
+          </li>
+      </ul>
+
   </li>
 
 </ul>

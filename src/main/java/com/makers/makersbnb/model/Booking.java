@@ -6,27 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
-
-@Table(name = "available_dates")
+@Table(name = "bookings")
 @Getter
 @Setter
 @NoArgsConstructor
-public class AvailableDate {
+public class Booking {
 
-    // the following field (id) is the primary key for this Entity
     @Id
-    // the value of id is generated automatically
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate date;
+    private LocalDate startDate;
+
+    private LocalDate endDate;
 
     @ManyToOne
-
     @JoinColumn(name = "space_id")
     private Space space;
-
 }

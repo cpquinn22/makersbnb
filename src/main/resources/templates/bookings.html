@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Bookings</title>
+</head>
+
+<body>
+
+<h1>My Bookings</h1>
+
+<ul>
+    <li th:each="booking : ${bookings}">
+
+        <h2 th:text="${booking.space.name}"></h2>
+
+        <p th:text="'Start date: ' + ${booking.startDate}"></p>
+
+        <p th:text="'End date: ' + ${booking.endDate}"></p>
+
+    </li>
+</ul>
+
+</body>
+</html>

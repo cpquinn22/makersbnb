@@ -19,13 +19,33 @@
 
       <ul>
           <li th:each="availableDate : ${space.dates}"
-              th:text="${#dates.format(availableDate.date, 'dd-MM-yyyy')}">
+              th:text="${#temporals.format(availableDate.date, 'dd-MM-yyyy')}">
           </li>
       </ul>
+
+      <!-- Booking form -->
+      <form th:action="@{/bookings}" method="post">
+
+          <input type="hidden"
+                 name="spaceId"
+                 th:value="${space.id}">
+
+          <label>Start date:</label>
+          <input type="date" name="startDate">
+
+          <label>End date:</label>
+          <input type="date" name="endDate">
+
+          <button type="submit">Book</button>
+
+      </form>
 
   </li>
 
 </ul>
+
+
+
 
 </body>
 </html>

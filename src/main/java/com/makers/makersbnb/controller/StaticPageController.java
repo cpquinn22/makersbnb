@@ -1,15 +1,22 @@
 package com.makers.makersbnb.controller;
 
+import com.makers.makersbnb.model.AvailableDate;
+import com.makers.makersbnb.model.Booking;
 import com.makers.makersbnb.model.Space;
 import com.makers.makersbnb.model.Team;
+import com.makers.makersbnb.repository.AvailableDateRepository;
+import com.makers.makersbnb.repository.BookingRepository;
 import com.makers.makersbnb.repository.SpaceRepository;
 import com.makers.makersbnb.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.time.LocalDate;
 
 @RestController
 public class StaticPageController {
@@ -19,6 +26,12 @@ public class StaticPageController {
 
     @Autowired
     TeamRepository teamRepository;
+
+    @Autowired
+    BookingRepository bookingRepository;
+
+    @Autowired
+    AvailableDateRepository availableDateRepository;
 
     @GetMapping("/")
     public ModelAndView welcome() {
@@ -87,4 +100,41 @@ public class StaticPageController {
     }
 
 
+    @PostMapping("/bookings")
+    public ModelAndView createBooking(
+            @RequestParam Long spaceId,
+            @RequestParam LocalDate startDate,
+            @RequestParam LocalDate endDate) {
+
+        Space space = spaceRepository.findById(spaceId).get();
+
+        for (AvailableDate availableDate : space.getDates()) {
+
+            LocalDate date = availableDate.getDate();
+
+            if (!date.isBefore(startDate) && !date.isAfter(endDate)) {
+                availableDateRepository.delete(availableDate);
+            }
+        }
+
+        Booking booking = new Booking();
+        booking.setSpace(space);
+        booking.setStartDate(startDate);
+        booking.setEndDate(endDate);
+
+        bookingRepository.save(booking);
+
+        return new ModelAndView("redirect:/spaces");
+    }
+
+    @GetMapping("/bookings")
+    public ModelAndView bookings() {
+        ModelAndView modelAndView = new ModelAndView("bookings");
+
+        Iterable<Booking> bookings = bookingRepository.findAll();
+
+        modelAndView.addObject("bookings", bookings);
+
+        return modelAndView;
+    }
 }

@@ -19,12 +19,17 @@
 </div>
 <h1>Welcome to MakersBnB</h1>
 
+<form th:action="@{/bookings}" method="get">
+    <button type="Submit">My Bookings</button>
+</form>
+
 <!-- th:text is a Thymeleaf atttribute used to generate the actual `h3` text -->
 <!-- within it, we use nSpaces which was passed in from the controller -->
 <h3 th:text="${nSpaces} + ' spaces are waiting to be discovered'"></h3>
 
 <form th:action="@{/spaces}" method="get">
     <button type="submit">To Available Spaces</button>
+</form>
 
 
 <h5>Recent reviews</h5>

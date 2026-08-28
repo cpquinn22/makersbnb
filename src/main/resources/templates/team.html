@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org"></html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,9 +11,9 @@
   <h1>Here is a list of our team</h1>
 
   <ul>
-    <li>Bruce Wayne</li>
-    <li>Clark Kent</li>
-    <li>Hal Jordan</li>
+        <li th:each="team : ${teams}"
+            th:text="|${team.name}, ${team.role}|"></li>
+
   </ul>
 
 </body>

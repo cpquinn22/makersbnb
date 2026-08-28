@@ -23,7 +23,9 @@
 <!-- within it, we use nSpaces which was passed in from the controller -->
 <h3 th:text="${nSpaces} + ' spaces are waiting to be discovered'"></h3>
 
-<h4 th:text="${nBookings} + ' bookings were made last week'"></h4>
+<form th:action="@{/spaces}" method="get">
+    <button type="submit">To Available Spaces</button>
+
 
 <h5>Recent reviews</h5>
 <ul>

@@ -1,7 +1,9 @@
 package com.makers.makersbnb.controller;
 
 import com.makers.makersbnb.model.Space;
+import com.makers.makersbnb.model.Team;
 import com.makers.makersbnb.repository.SpaceRepository;
+import com.makers.makersbnb.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,6 +16,9 @@ public class StaticPageController {
     // Automatically provides the SpaceRepository so we can interact with the spaces table
     @Autowired
     SpaceRepository spaceRepository;
+
+    @Autowired
+    TeamRepository teamRepository;
 
     @GetMapping("/")
     public ModelAndView welcome() {
@@ -48,15 +53,20 @@ public class StaticPageController {
         return modelAndView;
     }
 
+    @GetMapping("/team")
+    public ModelAndView team() {
+        ModelAndView modelAndView = new ModelAndView(("/team"));
+        Iterable<Team> teams = teamRepository.findAll();
+        modelAndView.addObject("teams", teams);
+        return modelAndView;
+    }
+
     @GetMapping("/contactus")
     public ModelAndView contactUs() {
         return new ModelAndView("/contactus");
     }
 
-    @GetMapping("/team")
-    public ModelAndView index() {
-        return new ModelAndView("/index");
-    }
+
 
     @GetMapping("/spaces/new")
     public ModelAndView newSpaceForm() {

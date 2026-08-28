@@ -12,7 +12,7 @@ import java.util.List;
 
 // @Table - those records can be found in the spaces table
 @Table(name = "SPACES")
-//@SecondaryTable(name = "available_dates", pkJoinColumns = @PrimaryKeyJoinColumn(name = "space_id"))
+
 @Getter @Setter @NoArgsConstructor
 
 public class Space {
@@ -35,9 +35,6 @@ public class Space {
     @OneToMany(mappedBy = "space")
 
     private List<AvailableDate> dates;
-
-
-
 
 }
 
